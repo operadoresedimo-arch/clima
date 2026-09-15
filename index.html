@@ -187,7 +187,7 @@ textarea{min-height:130px;resize:vertical;line-height:1.6}
         <h2>Sua opinião <em>muda</em> o nosso dia a dia.</h2>
         <p>São 10 perguntas rápidas sobre como é trabalhar aqui. Leva menos de 4 minutos e ajuda a gente a melhorar de verdade.</p>
         <div class="avisos">
-          <div class="aviso"><span class="pt"></span><div><b>É anônimo.</b> Não pedimos nome, matrícula nem nada que identifique você.</div></div>
+          <div class="aviso"><span class="pt"></span><div><b>É anônimo.</b> Não pedimos nome nem matrícula. Só setor e turno, para sabermos onde melhorar.</div></div>
           <div class="aviso"><span class="pt"></span><div><b>Seja sincero.</b> Resposta bonitinha não resolve problema nenhum.</div></div>
           <div class="aviso"><span class="pt"></span><div><b>Tudo é lido.</b> Os resultados viram plano de ação junto à liderança.</div></div>
         </div>
@@ -264,12 +264,14 @@ var perguntas = [
   {
     id:"perfil",
     titulo:"Pra começar, conta um pouco sobre você.",
-    dica:"Opcional. Serve só pra entendermos o retrato geral da equipe.",
+    dica:"Opcional e continua anônimo: serve só pra sabermos em qual setor e turno estão os pontos de melhoria. Se preferir, deixe em branco.",
     obrigatoria:false,
     campos:[
       {k:"faixa", tipo:"pills", rotulo:"Faixa etária", ops:["Até 20","21 a 25","26 a 30","31 a 40","41 a 50","Acima de 50","Prefiro não dizer"]},
       {k:"sexo", tipo:"pills", rotulo:"Sexo", ops:["Feminino","Masculino","Outro","Prefiro não dizer"]},
-      {k:"tempo", tipo:"pills", rotulo:"Tempo de casa", ops:["Menos de 3 meses","3 a 12 meses","1 a 3 anos","Mais de 3 anos"]}
+      {k:"tempo", tipo:"pills", rotulo:"Tempo de casa", ops:["Menos de 3 meses","3 a 12 meses","1 a 3 anos","Mais de 3 anos"]},
+      {k:"setor", tipo:"pills", rotulo:"Setor", ops:["Cobrança / Operação","Supervisão","Secretaria","Jurídico","Recepção","Financeiro","RH","TI","Outro"]},
+      {k:"turno", tipo:"pills", rotulo:"Turno", ops:["Manhã","Tarde","Integral","Prefiro não dizer"]}
     ]
   },
   {
