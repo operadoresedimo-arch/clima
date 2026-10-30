@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa de Liderança | Advocacia Edimo</title>
+<style>
+:root{--cinza:#484A4E;--cinza-2:#5E6166;--dourado:#D4A937;--dourado-claro:#E7C766;--creme:#FDF8F0;--branco:#FFFFFF;--borda:#E6DECF;--texto:#2B2C2F;--suave:#807F7C}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--texto);background:var(--creme);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;background:radial-gradient(900px 600px at 12% -10%,rgba(212,169,55,.16),transparent 60%),radial-gradient(800px 700px at 105% 110%,rgba(72,74,78,.16),transparent 60%),linear-gradient(180deg,#FDF8F0 0%,#F7F0E3 100%)}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(72,74,78,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(72,74,78,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent);mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent)}
+.wrap{position:relative;z-index:1;width:100%;max-width:760px}
+.marca{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.selo{width:46px;height:46px;border-radius:12px;flex:none;background:linear-gradient(145deg,var(--cinza),#33353A);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(72,74,78,.28)}
+.selo svg{width:24px;height:24px}
+.marca h1{font-size:15px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza)}
+.marca span{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dourado);font-weight:700;margin-top:3px}
+.card{background:var(--branco);border:1px solid var(--borda);border-radius:20px;box-shadow:0 26px 60px -30px rgba(72,74,78,.45),0 2px 6px rgba(72,74,78,.05);overflow:hidden}
+.barra{height:5px;background:#EFE7D8}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--dourado),var(--dourado-claro));transition:width .45s cubic-bezier(.4,0,.2,1)}
+.corpo{padding:38px 40px 32px}
+.capa h2{font-size:32px;line-height:1.15;font-weight:800;color:var(--cinza);letter-spacing:-.02em}
+.capa h2 em{font-style:normal;color:var(--dourado)}
+.capa p{margin-top:16px;font-size:16px;line-height:1.65;color:var(--cinza-2)}
+.avisos{margin-top:22px;display:grid;gap:10px}
+.aviso{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--cinza-2);line-height:1.5}
+.aviso b{color:var(--texto)}
+.pt{width:7px;height:7px;border-radius:50%;background:var(--dourado);margin-top:8px;flex:none}
+.etapa{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dourado);font-weight:700}
+.pergunta{margin-top:12px;font-size:23px;line-height:1.35;font-weight:700;color:var(--cinza);letter-spacing:-.01em}
+.dica{margin-top:9px;font-size:14px;color:var(--suave);line-height:1.5}
+.bloco{margin-top:26px}
+.rotulo{font-size:13.5px;font-weight:700;color:var(--cinza-2);margin-bottom:11px;display:block}
+.rotulo small{font-weight:500;color:var(--suave)}
+.escala{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.escala.q4{grid-template-columns:repeat(4,1fr)}
+.escala.q3{grid-template-columns:repeat(3,1fr)}
+.op{border:1.5px solid var(--borda);background:#FDFBF7;border-radius:13px;padding:15px 6px 12px;text-align:center;cursor:pointer;transition:transform .16s ease,border-color .16s,background .16s,box-shadow .16s;display:flex;flex-direction:column;align-items:center;gap:7px}
+.op:hover{transform:translateY(-2px);border-color:var(--dourado);background:#fff}
+.op .car{font-size:22px;line-height:1}
+.op .txt{font-size:12px;font-weight:600;color:var(--cinza-2);line-height:1.25}
+.op.on{border-color:var(--dourado);background:#FFF8E6;box-shadow:0 0 0 3px rgba(212,169,55,.18)}
+.op.on .txt{color:var(--cinza)}
+.pills{display:flex;flex-wrap:wrap;gap:9px}
+.pill{border:1.5px solid var(--borda);background:#FDFBF7;border-radius:999px;padding:11px 20px;font-size:14px;font-weight:600;color:var(--cinza-2);cursor:pointer;transition:all .16s ease;font-family:inherit}
+.pill:hover{border-color:var(--dourado);background:#fff}
+.pill.on{border-color:var(--dourado);background:#FFF8E6;color:var(--cinza)}
+input.campo{width:100%;font:inherit;font-size:15px;color:var(--texto);border:1.5px solid var(--borda);border-radius:12px;padding:13px 15px;background:#FDFBF7}
+input.campo:focus{outline:none;border-color:var(--dourado);background:#fff;box-shadow:0 0 0 3px rgba(212,169,55,.16)}
+.dupla{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+#impressao{display:none}
+@media print{body{background:#fff;display:block;padding:0}body::before,body::after,.wrap{display:none!important}#impressao{display:block;font-family:Arial,sans-serif;color:#000;font-size:12px;line-height:1.45}#impressao h1{font-size:16px;margin-bottom:2px}#impressao .sub{font-size:11px;color:#444;margin-bottom:12px}#impressao .id{border:1px solid #000;padding:8px 10px;margin-bottom:12px}#impressao .q{margin-bottom:8px;page-break-inside:avoid}#impressao .q b{display:block}#impressao .q div{margin-left:12px}#impressao .decl{margin-top:16px;border-top:1px solid #000;padding-top:10px;page-break-inside:avoid}#impressao .ass{margin-top:48px;display:flex;gap:40px}#impressao .ass div{flex:1;border-top:1px solid #000;text-align:center;padding-top:4px}@page{margin:14mm}}
+textarea{width:100%;font:inherit;font-size:15px;color:var(--texto);border:1.5px solid var(--borda);border-radius:12px;padding:13px 15px;background:#FDFBF7;transition:border-color .16s,box-shadow .16s;min-height:120px;resize:vertical;line-height:1.6}
+textarea:focus{outline:none;border-color:var(--dourado);background:#fff;box-shadow:0 0 0 3px rgba(212,169,55,.16)}
+.rodape{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 40px 26px}
+.cont{font-size:13px;color:var(--suave);font-weight:600}
+.acoes{display:flex;gap:10px}
+.btn{font:inherit;font-size:14.5px;font-weight:700;border-radius:12px;padding:13px 26px;cursor:pointer;border:1.5px solid transparent;transition:all .18s ease}
+.btn-ghost{background:transparent;color:var(--cinza-2);border-color:var(--borda)}
+.btn-ghost:hover{background:#F6F1E7;color:var(--cinza)}
+.btn-ouro{background:linear-gradient(145deg,var(--cinza),#34363A);color:#fff;box-shadow:0 10px 24px -10px rgba(72,74,78,.7)}
+.btn-ouro:hover{transform:translateY(-1px)}
+.btn-ouro:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-big{background:linear-gradient(145deg,var(--dourado),#C39A2C);color:#3A2E0C;padding:15px 34px;font-size:15.5px;box-shadow:0 12px 26px -12px rgba(212,169,55,.9)}
+.btn-big:hover{transform:translateY(-1px)}
+.oculto{display:none}
+.fade{animation:sobe .32s cubic-bezier(.3,0,.2,1)}
+@keyframes sobe{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.fim{text-align:center;padding:56px 40px 50px}
+.check{width:72px;height:72px;margin:0 auto 22px;border-radius:50%;background:linear-gradient(145deg,var(--dourado),#C39A2C);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(212,169,55,.9)}
+.fim h2{font-size:27px;color:var(--cinza);font-weight:800;letter-spacing:-.02em}
+.fim p{margin-top:12px;font-size:16px;color:var(--cinza-2);line-height:1.6}
+.alerta{margin-top:20px;font-size:13.5px;color:#8A6A12;background:#FFF6DF;border:1px solid #F0DFAE;border-radius:12px;padding:13px 16px;line-height:1.55;text-align:left}
+.rodape-nota{text-align:center;font-size:12px;color:var(--suave);margin-top:18px;letter-spacing:.04em}
+@media (max-width:620px){
+  .corpo{padding:28px 22px 24px}
+  .rodape{padding:16px 22px 22px;flex-direction:column-reverse;align-items:stretch}
+  .acoes{display:grid;grid-template-columns:1fr 1fr}
+  .cont{text-align:center}
+  .capa h2{font-size:25px}
+  .pergunta{font-size:19.5px}
+  .escala{gap:6px}
+  .op{padding:11px 3px 9px}
+  .op .car{font-size:18px}
+  .op .txt{font-size:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="marca">
+    <div class="selo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#D4A937" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M3 8l4-3 4 3M3 8l2 5h4l2-5M13 8l4-3 4 3M13 8l2 5h4l2-5"/></svg>
+    </div>
+    <div><h1>Advocacia Edimo</h1><span>Pesquisa de Liderança</span></div>
+  </div>
+
+  <div class="card">
+    <div class="barra"><i id="barra"></i></div>
+
+    <div id="capa">
+      <div class="corpo capa fade">
+        <h2>Como é ser <em>liderado</em> aqui?</h2>
+        <p>Queremos saber, com sinceridade, como a liderança trata a equipe no dia a dia. O objetivo é corrigir o que estiver errado e fazer daqui um lugar onde todo mundo se sinta à vontade.</p>
+        <div class="avisos">
+          <div class="aviso"><span class="pt"></span><div><b>Confidencial.</b> Suas respostas são lidas só pela direção e nunca são repassadas à sua liderança.</div></div>
+          <div class="aviso"><span class="pt"></span><div><b>Sem punição.</b> Nenhuma resposta gera qualquer tipo de retaliação.</div></div>
+          <div class="aviso"><span class="pt"></span><div><b>Fale a verdade.</b> Só dá pra corrigir o que a gente fica sabendo. Ao final, o documento é impresso para sua assinatura.</div></div>
+        </div>
+      </div>
+      <div class="rodape">
+        <span class="cont">Identificação + 9 perguntas · ~5 minutos</span>
+        <div class="acoes"><button class="btn btn-big" onclick="iniciar()">Começar</button></div>
+      </div>
+    </div>
+
+    <div id="quiz" class="oculto">
+      <div class="corpo" id="palco"></div>
+      <div class="rodape">
+        <span class="cont" id="contador"></span>
+        <div class="acoes">
+          <button class="btn btn-ghost" id="btnVoltar" onclick="voltar()">Voltar</button>
+          <button class="btn btn-ouro" id="btnAvancar" onclick="avancar()">Avançar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="fim" class="oculto">
+      <div class="fim fade">
+        <div class="check"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#3A2E0C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h2 id="fimTitulo">Obrigado pela sinceridade!</h2>
+        <p id="fimTexto">Suas respostas foram enviadas. Agora imprima o documento e assine.</p>
+        <div id="fimAlerta" class="alerta oculto"></div>
+        <div style="margin-top:26px"><button class="btn btn-big" onclick="imprimir()">Imprimir para assinatura</button></div>
+      </div>
+    </div>
+  </div>
+  <p class="rodape-nota">Advocacia Edimo Debarba Junior · Pesquisa interna confidencial</p>
+</div>
+
+<div id="impressao"></div>
+<script>
+/* ====== CONFIGURAÇÃO DE ENVIO ====== */
+var EMAIL_DESTINO = "operadores.edimo@gmail.com";
+/* =================================== */
+
+var FREQ_BOA = [ // positivo = sempre
+  {c:"✖", t:"Nunca"},{c:"◔", t:"Raramente"},{c:"◑", t:"Às vezes"},{c:"◕", t:"Quase sempre"},{c:"●", t:"Sempre"}
+];
+var FREQ_RUIM = [ // positivo = nunca
+  {c:"●", t:"Nunca"},{c:"◕", t:"Uma vez"},{c:"◑", t:"Algumas vezes"},{c:"✖", t:"Com frequência"}
+];
+var NOTA = [
+  {c:"1", t:"Péssima"},{c:"2", t:"Ruim"},{c:"3", t:"Regular"},{c:"4", t:"Boa"},{c:"5", t:"Excelente"}
+];
+var SIM_NAO = [
+  {c:"✖", t:"Não"},{c:"◑", t:"Em parte"},{c:"●", t:"Sim"}
+];
+
+var perguntas = [
+  {id:"identificacao", titulo:"Identificação do colaborador", dica:"Preencha seu nome completo e a data de hoje.",
+   campos:[
+     {k:"nome", tipo:"input", rotulo:"Nome completo", ph:"Seu nome completo"},
+     {k:"data", tipo:"data", rotulo:"Data"},
+     {k:"turno", tipo:"pills", rotulo:"Turno", ops:["Manhã","Tarde","Integral"]}
+   ]},
+
+  {id:"respeito", titulo:"A liderança trata a equipe com respeito?", dica:"Pense no tom de voz, na forma de cobrar e no jeito de falar com as pessoas.",
+   campos:[{k:"respeito", tipo:"escala", rotulo:"A liderança trata a equipe com respeito e educação", esc:FREQ_BOA}]},
+
+  {id:"correcao", titulo:"Quando algo dá errado, como a liderança corrige?", dica:"Errar faz parte. O que importa é como o erro é tratado.",
+   campos:[
+     {k:"reservado", tipo:"escala", rotulo:"O feedback é dado em particular, sem expor a pessoa na frente dos colegas", esc:FREQ_BOA},
+     {k:"construtivo", tipo:"escala", rotulo:"A correção ensina o jeito certo, em vez de só apontar o erro", esc:FREQ_BOA}
+   ]},
+
+  {id:"constrangimento", titulo:"Você já passou ou presenciou situações constrangedoras vindas da liderança?", dica:"Comentários, apelidos, brincadeiras de mau gosto, piadas sobre desempenho ou isolamento de alguém da equipe.",
+   campos:[
+     {k:"passou", tipo:"escala", rotulo:"Comigo mesmo(a)", esc:FREQ_RUIM},
+     {k:"presenciou", tipo:"escala", rotulo:"Com algum colega, na minha frente", esc:FREQ_RUIM},
+     {k:"relato", tipo:"texto", rotulo:"Se quiser, conte o que aconteceu <small>(opcional, sem citar nomes de colegas)</small>", ph:"Descreva a situação do jeito que se sentir confortável."}
+   ]},
+
+  {id:"justica", titulo:"A liderança trata todos de forma igual?", dica:"Sem favoritismo, sem perseguição.",
+   campos:[{k:"justica", tipo:"escala", rotulo:"Todos são tratados com o mesmo critério e a mesma consideração", esc:FREQ_BOA}]},
+
+  {id:"orientacao", titulo:"As orientações e a cobrança de metas são claras e saudáveis?", dica:"Você sabe o que esperam de você e é cobrado(a) de forma justa?",
+   campos:[
+     {k:"clareza", tipo:"escala", rotulo:"As orientações e treinamentos são claros e não mudam toda hora", esc:FREQ_BOA},
+     {k:"metas", tipo:"escala", rotulo:"A cobrança de metas é feita sem pressão excessiva ou humilhação", esc:FREQ_BOA}
+   ]},
+
+  {id:"abertura", titulo:"Você se sente à vontade para falar?", dica:"Sem medo de retaliação ou de virar assunto na equipe.",
+   campos:[
+     {k:"lider", tipo:"escala", rotulo:"Levar um problema ou discordância para a minha liderança", esc:SIM_NAO},
+     {k:"rh", tipo:"escala", rotulo:"Levar um problema com a liderança para o RH ou a direção", esc:SIM_NAO}
+   ]},
+
+  {id:"reconhecimento", titulo:"Seu trabalho é reconhecido?", dica:"Um elogio, um obrigado, um retorno positivo quando você faz bem feito.",
+   campos:[{k:"reconhece", tipo:"escala", rotulo:"A liderança reconhece quando faço um bom trabalho", esc:FREQ_BOA}]},
+
+  {id:"equipe", titulo:"E o clima entre a equipe?", dica:"Fofoca e exposição de erros também afetam o ambiente.",
+   campos:[
+     {k:"fofoca", tipo:"escala", rotulo:"Erros ou problemas de colegas são comentados e espalhados pela equipe", esc:FREQ_RUIM},
+     {k:"nota", tipo:"escala", rotulo:"Que nota você dá para a sua liderança hoje?", esc:NOTA}
+   ]},
+
+  {id:"conselho", titulo:"Se pudesse dar um conselho à sua liderança, qual seria?", dica:"Esse é o espaço mais importante da pesquisa. Escreva à vontade.",
+   campos:[
+     {k:"conselho", tipo:"texto", rotulo:"Meu conselho para a liderança", ph:"Ex.: dar feedback em particular, ser mais paciente com os novatos..."},
+     {k:"vontade", tipo:"texto", rotulo:"O que faria você se sentir mais à vontade aqui dentro?", ph:"Qualquer coisa: ambiente, comunicação, rotina, relacionamento..."}
+   ]}
+];
+
+var i=0, respostas={};
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function txtLimpo(s){return String(s).replace(/<[^>]+>/g,"").trim()}
+
+function hoje(){var d=new Date();return ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear()}
+function iniciar(){document.getElementById("capa").classList.add("oculto");document.getElementById("quiz").classList.remove("oculto");render()}
+
+function render(){
+  var p=perguntas[i], h='<div class="fade">';
+  h+='<div class="etapa">Pergunta '+(i+1)+' de '+perguntas.length+'</div>';
+  h+='<div class="pergunta">'+p.titulo+'</div>';
+  if(p.dica) h+='<div class="dica">'+p.dica+'</div>';
+  p.campos.forEach(function(c){
+    var val=respostas[p.id]&&respostas[p.id][c.k];
+    h+='<div class="bloco"><span class="rotulo">'+c.rotulo+'</span>';
+    if(c.tipo==="escala"){
+      var cls=c.esc.length===4?" q4":(c.esc.length===3?" q3":"");
+      h+='<div class="escala'+cls+'">';
+      c.esc.forEach(function(o){
+        h+='<div class="op'+(val===o.t?" on":"")+'" onclick="marcar(\''+c.k+'\',\''+o.t+'\')"><span class="car">'+o.c+'</span><span class="txt">'+o.t+'</span></div>';
+      });
+      h+='</div>';
+    } else if(c.tipo==="pills"){
+      h+='<div class="pills">';
+      c.ops.forEach(function(o){h+='<button type="button" class="pill'+(val===o?" on":"")+'" onclick="marcar(\''+c.k+'\',\''+o+'\')">'+o+'</button>'});
+      h+='</div>';
+    } else if(c.tipo==="input"){
+      h+='<input class="campo" type="text" placeholder="'+esc(c.ph)+'" value="'+(val?esc(val):"")+'" oninput="marcar(\''+c.k+'\',this.value)">';
+    } else if(c.tipo==="data"){
+      if(!val){ val=hoje(); if(!respostas[p.id]) respostas[p.id]={}; respostas[p.id][c.k]=val; }
+      h+='<input class="campo" type="text" placeholder="dd/mm/aaaa" maxlength="10" value="'+esc(val)+'" oninput="marcar(\''+c.k+'\',this.value)">';
+    } else {
+      h+='<textarea placeholder="'+esc(c.ph)+'" oninput="marcar(\''+c.k+'\',this.value)">'+(val?esc(val):"")+'</textarea>';
+    }
+    h+='</div>';
+  });
+  h+='</div>';
+  document.getElementById("palco").innerHTML=h;
+  document.getElementById("barra").style.width=(i/perguntas.length*100)+"%";
+  document.getElementById("contador").textContent="Pergunta "+(i+1)+" de "+perguntas.length;
+  document.getElementById("btnVoltar").style.visibility=i===0?"hidden":"visible";
+  document.getElementById("btnAvancar").textContent=(i===perguntas.length-1)?"Enviar respostas":"Avançar";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function marcar(k,v){
+  var p=perguntas[i];
+  if(!respostas[p.id]) respostas[p.id]={};
+  respostas[p.id][k]=v;
+  var t=p.campos.filter(function(c){return c.k===k})[0].tipo; if(t==="escala"||t==="pills") render();
+}
+
+function completa(){
+  var p=perguntas[i];
+  if(p.obrigatoria===false) return true;
+  var r=respostas[p.id]||{};
+  return p.campos.every(function(c){
+    if(c.tipo==="texto") return true;
+    if(c.tipo==="input") return r[c.k]&&String(r[c.k]).trim().split(/\s+/).length>=2;
+    if(c.tipo==="data") return /^\d{2}\/\d{2}\/\d{4}$/.test(r[c.k]||"");
+    return r[c.k];
+  });
+}
+
+function avancar(){
+  if(!completa()){
+    var b=document.getElementById("btnAvancar");
+    b.textContent="Responda todas acima";
+    setTimeout(function(){b.textContent=(i===perguntas.length-1)?"Enviar respostas":"Avançar"},1500);
+    return;
+  }
+  if(i===perguntas.length-1){enviar();return}
+  i++;render();
+}
+function voltar(){if(i>0){i--;render()}}
+
+function montarTexto(){
+  var L=["PESQUISA DE LIDERANÇA - ADVOCACIA EDIMO","Enviada em: "+new Date().toLocaleString("pt-BR"),""];
+  perguntas.forEach(function(p,n){
+    L.push((n+1)+") "+p.titulo);
+    var r=respostas[p.id]||{};
+    p.campos.forEach(function(c){L.push("   - "+txtLimpo(c.rotulo)+": "+(r[c.k]&&String(r[c.k]).trim()?r[c.k]:"(não respondido)"))});
+    L.push("");
+  });
+  return L.join("\n");
+}
+
+function enviar(){
+  var btn=document.getElementById("btnAvancar");
+  btn.disabled=true;btn.textContent="Enviando...";
+  var payload={_subject:"Pesquisa de Liderança - "+((respostas.identificacao||{}).nome||""),_template:"box",Respostas:montarTexto()};
+  perguntas.forEach(function(p,n){
+    var r=respostas[p.id]||{};
+    p.campos.forEach(function(c){payload[(n+1)+". "+txtLimpo(c.rotulo)]=r[c.k]&&String(r[c.k]).trim()?r[c.k]:"-"});
+  });
+  fetch("https://formsubmit.co/ajax/"+EMAIL_DESTINO,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)})
+  .then(function(res){if(!res.ok)throw new Error("falha");return res.json()})
+  .then(function(){fim(true)})
+  .catch(function(){fim(false)});
+}
+
+function fim(ok){
+  document.getElementById("quiz").classList.add("oculto");
+  document.getElementById("fim").classList.remove("oculto");
+  document.getElementById("barra").style.width="100%";
+  if(!ok){
+    document.getElementById("fimTitulo").textContent="Não conseguimos enviar";
+    document.getElementById("fimTexto").textContent="A conexão falhou, mas você ainda pode imprimir e assinar. Se puder, baixe também o arquivo e entregue ao RH.";
+    var a=document.getElementById("fimAlerta");a.classList.remove("oculto");
+    a.innerHTML='<b>Envio automático indisponível.</b><br><br><button class="btn btn-big" onclick="baixar()">Baixar minhas respostas</button>';
+  }
+}
+function imprimir(){
+  var id=respostas.identificacao||{}, h='';
+  h+='<h1>ADVOCACIA EDIMO DEBARBA JUNIOR · PESQUISA DE LIDERANÇA E AMBIENTE DE TRABALHO</h1>';
+  h+='<div class="sub">Documento interno e confidencial</div>';
+  h+='<div class="id"><b>Colaborador(a):</b> '+esc(id.nome||"")+' &nbsp;&nbsp; <b>Data:</b> '+esc(id.data||"")+' &nbsp;&nbsp; <b>Turno:</b> '+esc(id.turno||"-")+'</div>';
+  perguntas.forEach(function(p,n){
+    if(n===0) return;
+    var r=respostas[p.id]||{};
+    h+='<div class="q"><b>'+n+'. '+p.titulo+'</b>';
+    p.campos.forEach(function(c){
+      var v=r[c.k]&&String(r[c.k]).trim()?r[c.k]:"(não respondido)";
+      h+='<div>'+txtLimpo(c.rotulo)+': <b style="display:inline">'+esc(v)+'</b></div>';
+    });
+    h+='</div>';
+  });
+  h+='<div class="decl">Declaro que respondi a esta pesquisa de forma livre e espontânea, sem orientação prévia de qualquer pessoa, e que fui informado(a) de que nenhuma resposta gerará qualquer tipo de punição ou retaliação.';
+  h+='<div class="ass"><div>Assinatura do(a) colaborador(a)</div><div>Data: ____/____/________</div></div></div>';
+  document.getElementById("impressao").innerHTML=h;
+  window.print();
+}
+function baixar(){
+  var blob=new Blob([montarTexto()],{type:"text/plain;charset=utf-8"});
+  var u=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=u;a.download="lideranca-"+Date.now()+".txt";a.click();URL.revokeObjectURL(u);
+}
+</script>
+</body>
+</html>
