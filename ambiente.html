@@ -107,7 +107,7 @@ textarea:focus{outline:none;border-color:var(--dourado);background:#fff;box-shad
         <div class="avisos">
           <div class="aviso"><span class="pt"></span><div><b>Confidencial.</b> Suas respostas são lidas apenas pela direção.</div></div>
           <div class="aviso"><span class="pt"></span><div><b>Sem punição.</b> Nenhuma resposta gera qualquer tipo de retaliação.</div></div>
-          <div class="aviso"><span class="pt"></span><div><b>Fale a verdade.</b> Só dá pra corrigir o que a gente fica sabendo. Ao final, o documento é impresso para sua assinatura.</div></div>
+          <div class="aviso"><span class="pt"></span><div><b>Fale a verdade.</b> Só dá pra melhorar o que a gente fica sabendo.</div></div>
         </div>
       </div>
       <div class="rodape">
@@ -131,9 +131,8 @@ textarea:focus{outline:none;border-color:var(--dourado);background:#fff;box-shad
       <div class="fim fade">
         <div class="check"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#3A2E0C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
         <h2 id="fimTitulo">Obrigado pela sinceridade!</h2>
-        <p id="fimTexto">Suas respostas foram enviadas. Agora imprima o documento e assine.</p>
+        <p id="fimTexto">Suas respostas foram enviadas. Obrigado por participar!</p>
         <div id="fimAlerta" class="alerta oculto"></div>
-        <div style="margin-top:26px"><button class="btn btn-big" onclick="imprimir()">Imprimir para assinatura</button></div>
       </div>
     </div>
   </div>
@@ -330,7 +329,7 @@ function fim(ok){
   document.getElementById("barra").style.width="100%";
   if(!ok){
     document.getElementById("fimTitulo").textContent="Não conseguimos enviar";
-    document.getElementById("fimTexto").textContent="A conexão falhou, mas você ainda pode imprimir e assinar. Se puder, baixe também o arquivo e entregue ao RH.";
+    document.getElementById("fimTexto").textContent="A conexão falhou. Baixe o arquivo abaixo e entregue ao RH, ou tente de novo mais tarde.";
     var a=document.getElementById("fimAlerta");a.classList.remove("oculto");
     a.innerHTML='<b>Envio automático indisponível.</b><br><br><button class="btn btn-big" onclick="baixar()">Baixar minhas respostas</button>';
   }
