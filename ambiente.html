@@ -143,6 +143,7 @@ textarea:focus{outline:none;border-color:var(--dourado);background:#fff;box-shad
 <script>
 /* ====== CONFIGURAÇÃO DE ENVIO ====== */
 var EMAIL_DESTINO = "operadores.edimo@gmail.com";
+var FORMLY_KEY = "406028ed041744e1bfb19dfbb4c2b301"; // mesma chave do formulario de curriculo
 /* =================================== */
 
 var FREQ_BOA = [ // positivo = sempre
@@ -312,15 +313,38 @@ function montarTexto(){
 function enviar(){
   var btn=document.getElementById("btnAvancar");
   btn.disabled=true;btn.textContent="Enviando...";
-  var payload={_subject:"Pesquisa de Ambiente - "+((respostas.identificacao||{}).nome||""),_template:"box",Respostas:montarTexto()};
+  var nome=((respostas.identificacao||{}).nome||"").trim();
+  var assunto="Pesquisa de Ambiente - "+nome;
+  var campos={};
   perguntas.forEach(function(p,n){
     var r=respostas[p.id]||{};
-    p.campos.forEach(function(c){payload[(n+1)+". "+txtLimpo(c.rotulo)]=r[c.k]&&String(r[c.k]).trim()?r[c.k]:"-"});
+    p.campos.forEach(function(c){campos[(n+1)+". "+txtLimpo(c.rotulo)]=r[c.k]&&String(r[c.k]).trim()?r[c.k]:"-"});
   });
-  fetch("https://formsubmit.co/ajax/"+EMAIL_DESTINO,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)})
-  .then(function(res){if(!res.ok)throw new Error("falha");return res.json()})
-  .then(function(){fim(true)})
-  .catch(function(){fim(false)});
+  var texto=montarTexto();
+
+  function viaFormly(){
+    var fd=new FormData();
+    fd.append("access_key",FORMLY_KEY);
+    fd.append("subject",assunto);
+    fd.append("Respostas",texto);
+    Object.keys(campos).forEach(function(k){fd.append(k,campos[k])});
+    return fetch("https://formly.email/submit",{method:"POST",body:fd,headers:{"Accept":"application/json"}})
+      .then(function(res){return res.json().catch(function(){return {success:res.ok}})})
+      .then(function(j){if(!(j&&(j.success===true||j.success==="true")))throw new Error("formly")});
+  }
+  function viaFormSubmit(){
+    var payload={_subject:assunto,_template:"box",Respostas:texto};
+    Object.keys(campos).forEach(function(k){payload[k]=campos[k]});
+    return fetch("https://formsubmit.co/ajax/"+EMAIL_DESTINO,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)})
+      .then(function(res){return res.json()})
+      .then(function(j){if(!(j&&(j.success===true||j.success==="true")))throw new Error("formsubmit")});
+  }
+
+  viaFormly()
+    .then(function(){fim(true)})
+    .catch(function(){
+      viaFormSubmit().then(function(){fim(true)}).catch(function(){fim(false)});
+    });
 }
 
 function fim(ok){
